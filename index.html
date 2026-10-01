@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; font-src 'self'; img-src 'self' data:; media-src 'self' blob: mediastream:; connect-src https://platform.ringcentral.com wss://*.ringcentral.com:*; base-uri 'none'; form-action 'none'">
+<meta name="referrer" content="no-referrer">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Lobby">
+<meta name="theme-color" content="#0E2A3B">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="stylesheet" href="styles.css">
+<title>Port of Longview Lobby</title>
+</head>
+<body data-state="boot" class="not-ready">
+
+<header class="topbar">
+  <div class="brand" id="brand">PORT OF LONGVIEW</div>
+  <div class="topbar-right">
+    <span class="when-idle when-ended when-fallback" data-kiosk-name>Main Lobby</span>
+    <span class="when-call call-status"><span class="live-dot" aria-hidden="true"></span><span id="call-status">Connecting…</span></span>
+  </div>
+</header>
+
+<!-- 1 · Idle -->
+<main class="screen" id="screen-idle">
+  <div class="stack">
+    <h1 class="display">Welcome.</h1>
+    <p class="lede">Tap below to speak with our receptionist.</p>
+  </div>
+  <div class="talk-wrap">
+    <div class="halo" aria-hidden="true"></div>
+    <button id="talk" class="talk" type="button" disabled aria-disabled="true">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+      <span id="talk-label">ONE MOMENT</span>
+    </button>
+  </div>
+  <p class="status" id="idle-status" role="status" aria-live="polite">Connecting to reception…</p>
+</main>
+
+<!-- 2 · On call -->
+<main class="screen" id="screen-call">
+  <div class="bars" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></div>
+  <div class="stack">
+    <h1 class="display" id="call-title" aria-live="polite">Connecting you now…</h1>
+    <p class="lede">Say who you’re here to see, or what brings you in.</p>
+  </div>
+  <button id="end-call" class="end-call" type="button">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+    <span>END CALL</span>
+  </button>
+</main>
+
+<!-- 3 · Ended -->
+<main class="screen" id="screen-ended">
+  <div class="check" aria-hidden="true"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+  <div class="stack">
+    <h1 class="display">Thanks. Have a seat.</h1>
+    <p class="lede">Someone will be right out to meet you.</p>
+  </div>
+  <button id="ended-return" class="link-button" type="button">Returning to the start in 10 seconds</button>
+</main>
+
+<!-- Fallback -->
+<main class="screen" id="screen-fallback">
+  <div class="alert" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="7" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+  <div class="stack" role="alert">
+    <h1 class="display" id="fallback-title">Please see the front desk.</h1>
+    <p class="lede" id="fallback-text">Our lobby phone is offline right now.</p>
+  </div>
+  <button id="fallback-return" class="link-button" type="button"></button>
+</main>
+
+<!-- PIN gate for the hidden setup screen (long-press the wordmark for 3 seconds) -->
+<main class="screen" id="screen-pin">
+  <form id="pin-form" class="pin-card" autocomplete="off">
+    <h1 class="setup-title">Staff setup</h1>
+    <label for="pin-input">Enter the setup PIN</label>
+    <input id="pin-input" name="pin" type="password" inputmode="numeric" pattern="[0-9]*" maxlength="8" autocomplete="off">
+    <p class="form-error" id="pin-error" role="alert"></p>
+    <div class="form-actions">
+      <button type="submit" class="btn primary">Unlock</button>
+      <button type="button" class="btn" id="pin-cancel">Cancel</button>
+    </div>
+  </form>
+</main>
+
+<!-- Hidden setup screen: the kiosk key is entered here and stored only on this device -->
+<main class="screen" id="screen-setup">
+  <form id="setup-form" class="setup-card" autocomplete="off" novalidate>
+    <h1 class="setup-title">Lobby kiosk setup</h1>
+    <p class="setup-note" id="setup-key-state">No key saved on this device yet.</p>
+    <fieldset>
+      <legend>RingCentral kiosk key</legend>
+      <label for="s-client-id">Client ID</label>
+      <input id="s-client-id" name="clientId" type="text" autocapitalize="off" autocorrect="off" spellcheck="false" autocomplete="off">
+      <label for="s-client-secret">Client secret</label>
+      <input id="s-client-secret" name="clientSecret" type="password" autocomplete="new-password">
+      <label for="s-jwt">JWT</label>
+      <textarea id="s-jwt" name="jwt" rows="4" autocapitalize="off" autocorrect="off" spellcheck="false" autocomplete="off"></textarea>
+    </fieldset>
+    <fieldset>
+      <legend>Kiosk</legend>
+      <div class="field-row">
+        <div><label for="s-target">Call target (extension)</label><input id="s-target" name="callTarget" type="text" inputmode="numeric"></div>
+        <div><label for="s-max">Max call length (minutes)</label><input id="s-max" name="maxMinutes" type="number" min="1" max="60" inputmode="numeric"></div>
+      </div>
+      <label for="s-name">Location label</label>
+      <input id="s-name" name="kioskName" type="text">
+      <label for="s-pin">New setup PIN (4 to 8 digits, blank keeps the current one)</label>
+      <input id="s-pin" name="pin" type="password" inputmode="numeric" pattern="[0-9]*" maxlength="8" autocomplete="new-password">
+    </fieldset>
+    <p class="form-status" id="setup-status" role="status" aria-live="polite"></p>
+    <div class="form-actions">
+      <button type="submit" class="btn primary">Test and save</button>
+      <button type="button" class="btn" id="setup-close">Close</button>
+      <button type="button" class="btn danger" id="setup-forget">Remove key from this iPad</button>
+    </div>
+    <details class="setup-events-wrap">
+      <summary>Recent events on this device</summary>
+      <pre id="setup-events"></pre>
+    </details>
+  </form>
+</main>
+
+<footer class="footer">
+  <span class="when-idle">Calls are recorded and transcribed. By tapping, you consent.</span>
+  <span class="when-call" id="call-note">The call ends on its own after 10 minutes.</span>
+  <span class="when-idle when-fallback">Emergency? Call 911.</span>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>

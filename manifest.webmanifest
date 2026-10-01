@@ -1,0 +1,10 @@
+{
+  "name": "Port of Longview Lobby",
+  "short_name": "Lobby",
+  "start_url": "./",
+  "scope": "./",
+  "display": "fullscreen",
+  "orientation": "any",
+  "background_color": "#0E2A3B",
+  "theme_color": "#0E2A3B"
+}
