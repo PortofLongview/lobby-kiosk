@@ -13,8 +13,9 @@
   --danger: #C2412D;
   --display: 'Barlow Condensed', 'Arial Narrow', sans-serif;
   --body: 'Barlow', system-ui, sans-serif;
-  --pad-x: max(16px, env(safe-area-inset-left), min(64px, 5vw));
-  --pad-y: max(16px, env(safe-area-inset-top), min(48px, 4vh));
+  /* breathing room added ON TOP of the notch / status bar / home indicator, not instead of it */
+  --pad-x: clamp(16px, 5vw, 64px);
+  --pad-y: clamp(16px, 4vh, 48px);
 }
 
 * { box-sizing: border-box; }
@@ -27,7 +28,11 @@ body {
   font-family: var(--body);
   display: grid;
   grid-template-rows: auto 1fr auto;
-  padding: var(--pad-y) var(--pad-x) max(var(--pad-y), env(safe-area-inset-bottom));
+  padding:
+    calc(env(safe-area-inset-top, 0px) + var(--pad-y))
+    calc(env(safe-area-inset-right, 0px) + var(--pad-x))
+    calc(env(safe-area-inset-bottom, 0px) + var(--pad-y))
+    calc(env(safe-area-inset-left, 0px) + var(--pad-x));
   overflow: hidden;
   -webkit-user-select: none;
   user-select: none;
