@@ -7,9 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="apple-mobile-web-app-title" content="Lobby">
-<meta name="theme-color" content="#0E2A3B">
+<meta name="theme-color" content="#FFFFFF">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="stylesheet" href="styles.css">
 <title>Port of Longview Lobby</title>
@@ -17,7 +17,7 @@
 <body data-state="boot" class="not-ready">
 
 <header class="topbar">
-  <div class="brand" id="brand">PORT OF LONGVIEW</div>
+  <div class="brand" id="brand"><svg xmlns="http://www.w3.org/2000/svg" focusable="false" viewBox="10 10 209 206" role="img" aria-labelledby="pol-logo-title"><title id="pol-logo-title">Port of Longview, established 1921</title><path d="M114.5 17 L186 50 L186 102 L43 102 L43 50 Z" fill="#A02714"/><polyline points="48 99 48 53 114.5 22.5 181 53 181 99" fill="none" stroke="#fff" stroke-width="1.3" stroke-linejoin="round"/><g fill="#fff"><rect x="111.2" y="31" width="6.6" height="4.2" rx="0.6"/><rect x="106" y="35.8" width="17" height="4.6" rx="0.6"/><rect x="102" y="41.2" width="25" height="4.4" rx="0.6"/><path d="M97 47 L132 47 L127.5 56 L120.4 63.4 L114.5 64.4 L108.6 63.4 L101.5 56 Z"/></g><path d="M114.5 48.5 L114.5 63" stroke="#A02714" stroke-width="1.1"/><text x="114.5" y="95" text-anchor="middle" font-family="Oswald, 'Arial Narrow', sans-serif" font-weight="600" font-size="26" fill="#fff" textLength="98" lengthAdjust="spacingAndGlyphs">PORT OF</text><text x="114.5" y="141.5" text-anchor="middle" font-family="Oswald, 'Arial Narrow', sans-serif" font-weight="700" font-size="40" fill="#1B2B3A" textLength="194" lengthAdjust="spacingAndGlyphs">LONGVIEW</text><path d="M43 151 L186 151 L186 179 L114.5 211 L43 179 Z" fill="#1B2B3A"/><polyline points="48 154 48 176 114.5 205.5 181 176 181 154" fill="none" stroke="#fff" stroke-width="1.3" stroke-linejoin="round"/><circle cx="68.5" cy="164.6" r="2.4" fill="#fff"/><circle cx="160.5" cy="164.6" r="2.4" fill="#fff"/><text x="114.5" y="171" text-anchor="middle" font-family="Oswald, 'Arial Narrow', sans-serif" font-weight="600" font-size="17.5" fill="#fff" textLength="75" lengthAdjust="spacingAndGlyphs">EST. 1921</text></svg></div>
   <div class="topbar-right">
     <span class="when-idle when-ended when-fallback" data-kiosk-name>Main Lobby</span>
     <span class="when-call call-status"><span class="live-dot" aria-hidden="true"></span><span id="call-status">Connecting…</span></span>
@@ -33,7 +33,7 @@
   <div class="talk-wrap">
     <div class="halo" aria-hidden="true"></div>
     <button id="talk" class="talk" type="button" disabled aria-disabled="true">
-      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+      <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
       <span id="talk-label">ONE MOMENT</span>
     </button>
   </div>
@@ -48,14 +48,14 @@
     <p class="lede">Say who you’re here to see, or what brings you in.</p>
   </div>
   <button id="end-call" class="end-call" type="button">
-    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+    <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
     <span>END CALL</span>
   </button>
 </main>
 
 <!-- 3 · Ended -->
 <main class="screen" id="screen-ended">
-  <div class="check" aria-hidden="true"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+  <div class="check" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
   <div class="stack">
     <h1 class="display">Thanks. Have a seat.</h1>
     <p class="lede">Someone will be right out to meet you.</p>
@@ -65,7 +65,7 @@
 
 <!-- Fallback -->
 <main class="screen" id="screen-fallback">
-  <div class="alert" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="7" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+  <div class="alert" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="7" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
   <div class="stack" role="alert">
     <h1 class="display" id="fallback-title">Please see the front desk.</h1>
     <p class="lede" id="fallback-text">Our lobby phone is offline right now.</p>
@@ -73,7 +73,7 @@
   <button id="fallback-return" class="link-button" type="button"></button>
 </main>
 
-<!-- PIN gate for the hidden setup screen (long-press the wordmark for 3 seconds) -->
+<!-- PIN gate for the hidden setup screen (long-press the logo for 3 seconds) -->
 <main class="screen" id="screen-pin">
   <form id="pin-form" class="pin-card" autocomplete="off">
     <h1 class="setup-title">Staff setup</h1>
