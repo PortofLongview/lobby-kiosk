@@ -50,16 +50,23 @@ button { font: inherit; color: inherit; border: 0; background: none; cursor: poi
 
 /* ---- chrome ---- */
 .topbar { display: flex; justify-content: space-between; align-items: center; gap: 16px; }
-.brand { display: block; height: clamp(64px, 12vmin, 112px); }
+.brand { display: block; height: clamp(96px, 17vmin, 176px); }
 .brand svg { display: block; height: 100%; width: auto; }
 .topbar-right { font-family: var(--display); font-weight: 600; text-transform: uppercase; letter-spacing: 2px; font-size: clamp(15px, 2vmin, 20px); color: var(--muted); }
 .call-status { display: inline-flex; align-items: center; gap: 10px; color: var(--ink); font-variant-numeric: tabular-nums; }
 .live-dot { width: 14px; height: 14px; border-radius: 50%; background: var(--line); }
 .connected .live-dot { background: var(--live); animation: pulse 1.4s ease-in-out infinite; }
 
-.footer { display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; font-size: clamp(14px, 1.8vmin, 17px); color: var(--muted); border-top: 1px solid var(--line); padding-top: 14px; }
-body[data-state="call"] .footer { justify-content: center; text-align: center; }
-body[data-state="setup"] .footer, body[data-state="pin"] .footer, body[data-state="ended"] .footer { border-top: 0; }
+/* Full-bleed slate band along the bottom, with a badge-red stripe on top. */
+.footer {
+  display: flex; justify-content: center; align-items: center; gap: 24px; text-align: center;
+  min-height: clamp(64px, 9vmin, 96px);
+  margin: 0 calc(-1 * (env(safe-area-inset-right, 0px) + var(--pad-x))) calc(-1 * (env(safe-area-inset-bottom, 0px) + var(--pad-y))) calc(-1 * (env(safe-area-inset-left, 0px) + var(--pad-x)));
+  padding: 14px calc(env(safe-area-inset-right, 0px) + var(--pad-x)) calc(env(safe-area-inset-bottom, 0px) + 14px) calc(env(safe-area-inset-left, 0px) + var(--pad-x));
+  background: var(--ink); color: #D5DDE3; border-top: 5px solid var(--accent);
+  font-size: clamp(15px, 2vmin, 19px);
+}
+body[data-state="setup"] .footer, body[data-state="pin"] .footer { display: none; }
 
 /* Show only the pieces that belong to the current state. */
 .when-idle, .when-call, .when-ended, .when-fallback { display: none; }
@@ -137,7 +144,6 @@ body[data-state="setup"] #screen-setup { display: flex; }
 
 /* Portrait phone (the iPhone test device) */
 @media (max-width: 600px) {
-  .footer { flex-direction: column; align-items: center; text-align: center; gap: 6px; }
   .end-call { padding: 0 40px; }
 }
 
